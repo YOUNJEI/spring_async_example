@@ -14,6 +14,11 @@ public class AsyncController {
     @Autowired
     private AsyncService asyncService;
 
+    @GetMapping("/sync/{name}")
+    public String sync(@PathVariable String name) throws InterruptedException {
+        return asyncService.sync(name);
+    }
+
     @GetMapping("/async/{name}")
     public String async(@PathVariable String name) throws InterruptedException {
         return asyncService.async(name);
@@ -30,10 +35,5 @@ public class AsyncController {
             e.printStackTrace();
         }
         return newName;
-    }
-
-    @GetMapping("/sync/{name}")
-    public String sync(@PathVariable String name) throws InterruptedException {
-        return asyncService.sync(name);
     }
 }
